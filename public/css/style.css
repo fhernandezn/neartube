@@ -1,0 +1,124 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+nav {
+    padding: 10px;
+    box-shadow: 1px 1px 1px #888;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+nav img {
+    height: 25px;
+    width: auto;
+}
+
+#video-list {
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+}
+
+#video-list .video {
+    width: 18%;
+    margin: 1%;
+    text-align: center;
+    cursor: pointer;
+}
+
+#video-list .video p {
+    max-height: 3.2rem;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    font-weight: 500;
+    line-height: 1.6rem;
+    width: 100%;
+    display: -webkit-box;
+    text-align: left;
+}
+
+#video-list .video video {
+    width: 100%;
+}
+
+aside {
+    width: 20%;
+    float: left;
+    background: #efefef;
+    margin-top: -8px;
+    height: 95%;
+}
+
+section {
+    width: calc(80% - 30px);
+    float: right;
+    padding: 15px;
+}
+
+aside div {
+    padding: 12px;
+    cursor: pointer;
+}
+
+aside div:hover {
+    background-color: #ccc;
+}
+
+#selected-video-container {
+    max-height: 90%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#selected-video-container #video-container {
+    width: 70%;
+    float: left;
+}
+
+#selected-video-container #next-video-container {
+    width: 30%;
+    float: right;
+}
+
+#selected-video-container #next-video-container .video {
+    width: 90%;
+    margin: 5%;
+    cursor: pointer;
+}
+
+#selected-video-container #video-container video,
+#selected-video-container #next-video-container .video video {
+    width: 100%;
+}
+
+#video-container input {
+    width: 75%;
+    margin-right: 25%;
+    padding: 10px;
+}
+
+#video-container button {
+    width: 15%;
+    margin: 10px 0;
+}
+
+.comment {
+    padding: 5px;
+}
+
+.comment p {
+    font-size: 0.7em;
+    color: #888;
+}

@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <nav>
+            <img v-on:click="seeVideoList()" src="https://s3-us-west-1.amazonaws.com/nearsoft-com-media/uploads/2018/06/nearsoft-aic.svg" alt="">
+        </nav>
+
+        <aside>
+            <div v-on:click="seeVideoList()">Inicio</div>
+            <div>Tendencias</div>
+            <div>Suscripciones</div>
+        </aside>
+
+        <section>
+            <div v-if="seeList" id="video-list">
+                <div class="video" v-for="video in videos" v-on:click="selectVideo(video)">
+                    <video v-on:mouseenter="play(video)" v-on:mouseout="stop(video)" :src="getVideoLink(video)" :id="video._id" v-bind:autoplay="video.play"
+                        muted></video>
+                    <p>
+                        {{video.name}}
+                    </p>
+                </div>
+            </div>
+
+            <div v-if="!seeList" id="selected-video-container">
+                <div id="video-container">
+                    <video :id="selectedVideo._id + 'selected'" :src="getSelectedVideoLink()" autobuffer controls preload="auto" type="video/mp4"></video>
+                    <h3></h3>{{selectedVideo.name}} <small>({{views}} viendo)</small></h3>
+
+                    <h4>Comentarios</h4>
+
+                    <input type="text" v-model="newComment" placeholder="Que quieres comentar?">
+                    <button v-on:click="saveComment()">Comentar</button>
+
+                    <div v-for="comment in comments" class="comment">
+                        <p>
+                            Published on {{comment.createdAt}}
+                        </p>
+                        {{comment.content}}
+                    </div>  
+                </div>
+                <div id="next-video-container">
+                    <div class="video" v-for="video in videos" v-on:click="selectVideo(video)">
+                        <video v-on:mouseenter="play(video)" v-on:mouseout="stop(video)" :src="getVideoLink(video)" :id="video._id" v-bind:autoplay="video.play"
+                            muted type="video/mp4"></video>
+                        <p>
+                            {{video.name}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
