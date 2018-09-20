@@ -1,12 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
 const PORT = 5000;
 
-app.use(express.static('public'));
+app.use(cors());
+app.use(express.static('public/dist'));
 
 app.use(bodyParser.json());
 
