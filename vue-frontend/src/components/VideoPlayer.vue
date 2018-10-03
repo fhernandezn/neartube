@@ -5,25 +5,40 @@
       autoplay="autoplay" controls
       v-bind:src="getApiUrl() + video.url">
     </video>
-    <h3 v-if="video !== null">{{video.name}}</h3>
+    <h3 v-if="video !== null">{{video.name}} <small>{{counter}} watching</small> </h3>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Socket from '../services/sockets';
+
+function loadVideo(videoId) {
+  return axios.get(`/api/video/${videoId}`)
+    .then(response => response.data.video);
+}
 
 export default {
   name: 'VideoPlayer',
   mounted: function mounted() {
-    axios.get(`/api/video/${this.videoId}`)
-      .then((response) => {
-        this.video = response.data.video;
+    loadVideo(this.videoId)
+      .then((video) => {
+        this.video = video;
       });
   },
   updated: function updated() {
-    axios.get(`/api/video/${this.videoId}`)
-      .then((response) => {
-        this.video = response.data.video;
+    loadVideo.bind(this);
+    loadVideo(this.videoId)
+      .then((video) => {
+        this.video = video;
+        Socket.startWatch(this.video._id);
+
+        if (this.listenerRegistered !== this.video._id) {
+          this.listenerRegistered = this.video._id;
+          Socket.listen(this.video._id, (counter) => {
+            this.counter = counter;
+          });
+        }
       });
   },
   methods: {
@@ -46,6 +61,8 @@ export default {
   data() {
     return {
       video: null,
+      listenerRegistered: false,
+      counter: 0,
     };
   },
 };
