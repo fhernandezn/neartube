@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+      <nav>
+        <router-link to="/">
+          <img src="https://s3-us-west-1.amazonaws.com/nearsoft-com-media/uploads/2018/06/nearsoft-aic.svg" alt="">
+        </router-link>
+      </nav>
     <router-view/>
   </div>
 </template>
@@ -16,16 +17,18 @@
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
+nav {
+  width: 100%;
+  height: 50px;
+  margin: 20px 0;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+nav img {
+  height: 100%;
+  float: left;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+body {
+  margin: 20px 10%;
 }
 </style>

@@ -61,7 +61,7 @@ export default {
   .video-preview-container {
     width: 20%;
     float: left;
-    margin: 5%;
+    margin: 2%;
     cursor: pointer;
   }
 

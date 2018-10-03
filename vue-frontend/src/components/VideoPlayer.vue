@@ -2,10 +2,10 @@
   <div id="video-player-container">
     <video v-if="video !== null"
       :id="getHTMLId()"
-      autoplay="autoplay" controls>
-      <source :src="getVideoLink(video)" type="video/mp4">
+      autoplay="autoplay" controls
+      v-bind:src="getApiUrl() + video.url">
     </video>
-    <p v-if="video !== null">{{video.name}}</p>
+    <h3 v-if="video !== null">{{video.name}}</h3>
   </div>
 </template>
 
@@ -20,6 +20,12 @@ export default {
         this.video = response.data.video;
       });
   },
+  updated: function updated() {
+    axios.get(`/api/video/${this.videoId}`)
+      .then((response) => {
+        this.video = response.data.video;
+      });
+  },
   methods: {
     getHTMLId() {
       return `${this.videoId}-player`;
@@ -29,6 +35,9 @@ export default {
         return `http://localhost:5000${this.video.url}`;
       }
       return '/';
+    },
+    getApiUrl() {
+      return 'http://localhost:5000';
     },
   },
   props: {
@@ -45,11 +54,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   #video-player-container {
-    width: 80%;
+    width: 75%;
     float: left;
+    margin-right: 5%;
   }
 
   video {
     width: 100%;
+  }
+
+  h3 {
+    text-align: left;
   }
 </style>
