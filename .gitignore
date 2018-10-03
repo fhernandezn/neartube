@@ -1,2 +1,4 @@
 public/videos/*
 node_modules
+public/dist/*
+vue-frontend/dist/*
