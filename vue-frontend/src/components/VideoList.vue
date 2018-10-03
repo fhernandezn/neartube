@@ -26,19 +26,6 @@ export default {
         this.videos = response.data.videos;
       });
   },
-  methods: {
-    getHTMLId() {
-      return `${this.videoId}-preview`;
-    },
-    getVideoLink() {
-      if (this.video) {
-        return `http://localhost:5000${this.video.url}`;
-      }
-      return '/';
-    },
-    play,
-    stop,
-  },
   props: {
     videoId: String,
     orientation: String,
