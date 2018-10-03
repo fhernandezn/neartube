@@ -9,6 +9,7 @@ const PORT = 5000;
 
 app.use(cors());
 app.use(express.static('public/dist'));
+app.use('/videos', express.static('public/videos'));
 
 app.use(bodyParser.json());
 

@@ -35,11 +35,11 @@ import axios from 'axios';
 
 export default {
   name: 'HelloWorld',
-  mounted: function () {
+  mounted() {
     this.test();
   },
   methods: {
-    test: function test () {
+    test: function test() {
       axios.get('/api/video')
         .then((response) => {
           debugger;
