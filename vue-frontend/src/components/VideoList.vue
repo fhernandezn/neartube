@@ -12,7 +12,6 @@
 
 <script>
 import VideoPreview from '@/components/VideoPreview.vue';
-import axios from 'axios';
 import { play, stop } from '../lib';
 
 export default {
@@ -20,33 +19,21 @@ export default {
   components: {
     VideoPreview,
   },
-  mounted: function mounted() {
-    axios.get('/api/video')
-      .then((response) => {
-        this.videos = response.data.videos;
-      });
-  },
   methods: {
-    getHTMLId() {
-      return `${this.videoId}-preview`;
-    },
-    getVideoLink() {
-      if (this.video) {
-        return `http://localhost:5000${this.video.url}`;
-      }
-      return '/';
-    },
     play,
     stop,
+  },
+  mounted() {
+    this.$store.dispatch('fetchVideoList');
   },
   props: {
     videoId: String,
     orientation: String,
   },
-  data() {
-    return {
-      videos: [],
-    };
+  computed: {
+    videos() {
+      return this.$store.getters.getList;
+    },
   },
 };
 </script>
