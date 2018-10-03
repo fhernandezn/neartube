@@ -20,14 +20,16 @@ function loadVideo(videoId) {
 
 export default {
   name: 'VideoPlayer',
-  mounted: function mounted() {
+  mounted() {
     loadVideo(this.videoId)
       .then((video) => {
         this.video = video;
       });
   },
-  updated: function updated() {
-    loadVideo.bind(this);
+  beforeDestroy() {
+    Socket.stopWatch();
+  },
+  updated() {
     loadVideo(this.videoId)
       .then((video) => {
         this.video = video;
